@@ -27,9 +27,19 @@ Different shell scripts are available to check the development version of `fdaPD
     ./fedora_clang_devel.sh
   ```
   
+  - Building check on Debian using R (unstable) and clang as compiler, run from terminal:
+  ```
+    ./debian_clang_devel.sh
+  ```
+  
   - Building check on Debian using R (patched) and gcc as compiler, run from terminal:
   ```
     ./debian_gcc_patched.sh
+  ```
+  
+  - Building check on Debian using R (unstable) and gcc as compiler, run from terminal:
+  ```
+    ./debian_gcc_devel.sh
   ```
 
 Finally, check the newly created directory `<distro>_<compiler>_<R_status>`.
