@@ -104,6 +104,7 @@ CPP_smooth.volume.FEM.time<-function(locations, time_locations, observations, FE
   coeff_Inference_Null=as.matrix(inference.data.object.null@coeff)
   beta_0_Null=as.vector(inference.data.object.null@beta0)
   f_0_eval_Null<-as.vector(inference.data.object.null@f0_eval)
+  scaling_factor_Inference_Null<-inference.data.object.null@scaling_factor
   f_var_Inference_Null<-inference.data.object.null@f_var
   inference_Quantile_Null=as.vector(inference.data.object.null@quantile)
   inference_Alpha_Null=inference.data.object.null@alpha
@@ -189,6 +190,7 @@ CPP_smooth.volume.FEM.time<-function(locations, time_locations, observations, FE
   storage.mode(coeff_Inference_Null) <- "double"
   storage.mode(beta_0_Null) <- "double"
   storage.mode(f_0_eval_Null) <- "double"
+  storage.mode(scaling_factor_Inference_Null) <- "double"
   storage.mode(f_var_Inference_Null) <- "integer"
   storage.mode(inference_Quantile_Null) <- "double"
   storage.mode(inference_Alpha_Null) <- "double"
@@ -223,7 +225,7 @@ CPP_smooth.volume.FEM.time<-function(locations, time_locations, observations, FE
      BC$BC_indices, BC$BC_values, incidence_matrix, areal.data.avg,
      search, as.integer(c(0,2,1)), lambdaSIC, DOF.stochastic.realizations, DOF.stochastic.seed, DOF.matrix_IC, GCV.inflation.factor, lambda.optimization.tolerance, 
      test_Type_Null,interval_Type_Null,implementation_Type_Null,component_Type_Null,exact_Inference_Null,locs_Inference_Null,locs_index_Inference_Null,locs_are_nodes_Inference_Null,coeff_Inference_Null,
-     beta_0_Null,f_0_eval_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
+     beta_0_Null,f_0_eval_Null,scaling_factor_Inference_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
      PACKAGE = "fdaPDE")
 
     ## shifting the lambdas interval if the best lambda is the smaller one and retry smoothing
@@ -237,7 +239,7 @@ CPP_smooth.volume.FEM.time<-function(locations, time_locations, observations, FE
        BC$BC_indices, BC$BC_values, incidence_matrix, areal.data.avg,
        search, as.integer(c(0,2,1)), lambdaSIC, DOF.stochastic.realizations, DOF.stochastic.seed, DOF.matrix_IC, GCV.inflation.factor, lambda.optimization.tolerance, 
        test_Type_Null,interval_Type_Null,implementation_Type_Null,component_Type_Null,exact_Inference_Null,locs_Inference_Null,locs_index_Inference_Null,locs_are_nodes_Inference_Null,coeff_Inference_Null,
-       beta_0_Null,f_0_eval_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
+       beta_0_Null,f_0_eval_Null,scaling_factor_Inference_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
        PACKAGE = "fdaPDE")
     }
     else
@@ -253,7 +255,7 @@ CPP_smooth.volume.FEM.time<-function(locations, time_locations, observations, FE
          BC$BC_indices, BC$BC_values, incidence_matrix, areal.data.avg,
          search, as.integer(c(0,2,1)), lambdaSIC, DOF.stochastic.realizations, DOF.stochastic.seed, DOF.matrix_IC, GCV.inflation.factor, lambda.optimization.tolerance, 
          test_Type_Null,interval_Type_Null,implementation_Type_Null,component_Type_Null,exact_Inference_Null,locs_Inference_Null,locs_index_Inference_Null,locs_are_nodes_Inference_Null,coeff_Inference_Null,
-         beta_0_Null,f_0_eval_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
+         beta_0_Null,f_0_eval_Null,scaling_factor_Inference_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
          PACKAGE = "fdaPDE")
       }
     }
@@ -420,6 +422,7 @@ CPP_smooth.volume.FEM.PDE.time<-function(locations, time_locations, observations
   coeff_Inference_Null=as.matrix(inference.data.object.null@coeff)
   beta_0_Null=as.vector(inference.data.object.null@beta0)
   f_0_eval_Null<-as.vector(inference.data.object.null@f0_eval)
+  scaling_factor_Inference_Null<-inference.data.object.null@scaling_factor
   f_var_Inference_Null<-inference.data.object.null@f_var
   inference_Quantile_Null=as.vector(inference.data.object.null@quantile)
   inference_Alpha_Null=inference.data.object.null@alpha
@@ -503,6 +506,7 @@ CPP_smooth.volume.FEM.PDE.time<-function(locations, time_locations, observations
   storage.mode(coeff_Inference_Null) <- "double"
   storage.mode(beta_0_Null) <- "double"
   storage.mode(f_0_eval_Null) <- "double"
+  storage.mode(scaling_factor_Inference_Null) <- "double"
   storage.mode(f_var_Inference_Null) <- "integer"
   storage.mode(inference_Quantile_Null) <- "double"
   storage.mode(inference_Alpha_Null) <- "double"
@@ -533,7 +537,7 @@ CPP_smooth.volume.FEM.PDE.time<-function(locations, time_locations, observations
       mydim, ndim, PDE_parameters$K, PDE_parameters$b, PDE_parameters$c, covariatesIC, BC$BC_indices, BC$BC_values,
       incidence_matrix, areal.data.avg, search, as.integer(c(0,2,1)), lambdaSIC, DOF.stochastic.realizations, DOF.stochastic.seed,  DOF.matrix_IC, GCV.inflation.factor, lambda.optimization.tolerance, 
       test_Type_Null,interval_Type_Null,implementation_Type_Null,component_Type_Null,exact_Inference_Null,locs_Inference_Null,locs_index_Inference_Null,locs_are_nodes_Inference_Null,coeff_Inference_Null,
-      beta_0_Null,f_0_eval_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
+      beta_0_Null,f_0_eval_Null,scaling_factor_Inference_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
       PACKAGE = "fdaPDE")
 
     if(ICsol[[6]]==1)
@@ -545,7 +549,7 @@ CPP_smooth.volume.FEM.PDE.time<-function(locations, time_locations, observations
        mydim, ndim, PDE_parameters$K, PDE_parameters$b, PDE_parameters$c, covariatesIC, BC$BC_indices, BC$BC_values,
        incidence_matrix, areal.data.avg, search, as.integer(c(0,2,1)), lambdaSIC, DOF.stochastic.realizations, DOF.stochastic.seed,  DOF.matrix_IC, GCV.inflation.factor, lambda.optimization.tolerance, 
        test_Type_Null,interval_Type_Null,implementation_Type_Null,component_Type_Null,exact_Inference_Null,locs_Inference_Null,locs_index_Inference_Null,locs_are_nodes_Inference_Null,coeff_Inference_Null,
-       beta_0_Null,f_0_eval_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
+       beta_0_Null,f_0_eval_Null,scaling_factor_Inference_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
        PACKAGE = "fdaPDE")
     }
     else
@@ -559,7 +563,7 @@ CPP_smooth.volume.FEM.PDE.time<-function(locations, time_locations, observations
          mydim, ndim, PDE_parameters$K, PDE_parameters$b, PDE_parameters$c, covariatesIC, BC$BC_indices, BC$BC_values,
          incidence_matrix, areal.data.avg, search, as.integer(c(0,2,1)), lambdaSIC, DOF.stochastic.realizations, DOF.stochastic.seed,  DOF.matrix_IC, GCV.inflation.factor, lambda.optimization.tolerance, 
          test_Type_Null,interval_Type_Null,implementation_Type_Null,component_Type_Null,exact_Inference_Null,locs_Inference_Null,locs_index_Inference_Null,locs_are_nodes_Inference_Null,coeff_Inference_Null,
-         beta_0_Null,f_0_eval_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
+         beta_0_Null,f_0_eval_Null,scaling_factor_Inference_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
          PACKAGE = "fdaPDE")
       }
     }
@@ -737,6 +741,7 @@ CPP_smooth.volume.FEM.PDE.sv.time<-function(locations, time_locations, observati
   coeff_Inference_Null=as.matrix(inference.data.object.null@coeff)
   beta_0_Null=as.vector(inference.data.object.null@beta0)
   f_0_eval_Null<-as.vector(inference.data.object.null@f0_eval)
+  scaling_factor_Inference_Null<-inference.data.object.null@scaling_factor
   f_var_Inference_Null<-inference.data.object.null@f_var
   inference_Quantile_Null=as.vector(inference.data.object.null@quantile)
   inference_Alpha_Null=inference.data.object.null@alpha
@@ -821,6 +826,7 @@ CPP_smooth.volume.FEM.PDE.sv.time<-function(locations, time_locations, observati
   storage.mode(coeff_Inference_Null) <- "double"
   storage.mode(beta_0_Null) <- "double"
   storage.mode(f_0_eval_Null) <- "double"
+  storage.mode(scaling_factor_Inference_Null) <- "double"
   storage.mode(f_var_Inference_Null) <- "integer"
   storage.mode(inference_Quantile_Null) <- "double"
   storage.mode(inference_Alpha_Null) <- "double"
@@ -853,7 +859,7 @@ CPP_smooth.volume.FEM.PDE.sv.time<-function(locations, time_locations, observati
       covariatesIC, BC$BC_indices, BC$BC_values, incidence_matrix, areal.data.avg,
       search, as.integer(c(0,2,1)), lambdaSIC, DOF.stochastic.realizations, DOF.stochastic.seed, DOF.matrix_IC, GCV.inflation.factor, lambda.optimization.tolerance,  
       test_Type_Null,interval_Type_Null,implementation_Type_Null,component_Type_Null,exact_Inference_Null,locs_Inference_Null,locs_index_Inference_Null,locs_are_nodes_Inference_Null,coeff_Inference_Null,
-      beta_0_Null,f_0_eval_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
+      beta_0_Null,f_0_eval_Null,scaling_factor_Inference_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
       PACKAGE = "fdaPDE")
 
     if(ICsol[[6]]==1)
@@ -866,7 +872,7 @@ CPP_smooth.volume.FEM.PDE.sv.time<-function(locations, time_locations, observati
        covariatesIC, BC$BC_indices, BC$BC_values, incidence_matrix, areal.data.avg,
        search, as.integer(c(0,2,1)), lambdaSIC, DOF.stochastic.realizations, DOF.stochastic.seed, DOF.matrix_IC, GCV.inflation.factor, lambda.optimization.tolerance,  
        test_Type_Null,interval_Type_Null,implementation_Type_Null,component_Type_Null,exact_Inference_Null,locs_Inference_Null,locs_index_Inference_Null,locs_are_nodes_Inference_Null,coeff_Inference_Null,
-       beta_0_Null,f_0_eval_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
+       beta_0_Null,f_0_eval_Null,scaling_factor_Inference_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
        PACKAGE = "fdaPDE")
     }
     else
@@ -881,7 +887,7 @@ CPP_smooth.volume.FEM.PDE.sv.time<-function(locations, time_locations, observati
          covariatesIC, BC$BC_indices, BC$BC_values, incidence_matrix, areal.data.avg,
          search, as.integer(c(0,2,1)), lambdaSIC, DOF.stochastic.realizations, DOF.stochastic.seed, DOF.matrix_IC, GCV.inflation.factor, lambda.optimization.tolerance,  
          test_Type_Null,interval_Type_Null,implementation_Type_Null,component_Type_Null,exact_Inference_Null,locs_Inference_Null,locs_index_Inference_Null,locs_are_nodes_Inference_Null,coeff_Inference_Null,
-         beta_0_Null,f_0_eval_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
+         beta_0_Null,f_0_eval_Null,scaling_factor_Inference_Null,f_var_Inference_Null,inference_Quantile_Null,inference_Alpha_Null,inference_N_Flip_Null, inference_Tol_Fspai_Null, inference_Defined_Null,
          PACKAGE = "fdaPDE")
       }
     }
