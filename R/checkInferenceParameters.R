@@ -5,7 +5,7 @@ checkInferenceParameters <- function(inference.data.object,checknumber,locations
     return(
       new("inferenceDataObject", test = as.integer(0), interval = as.integer(0), type = as.integer(0), component = as.integer(0), exact = as.integer(0), dim = as.integer(0), n_cov = as.integer(0),
           locations = matrix(data=0, nrow = 1 ,ncol = 1), locations_indices = as.integer(0), locations_are_nodes = as.integer(0), coeff = matrix(data=0, nrow = 1 ,ncol = 1), beta0 = -1, f0 = function(){}, 
-          f0_eval = -1, f_var = as.integer(0), quantile = -1, alpha = 0, n_flip = as.integer(1000), tol_fspai = -1, definition=as.integer(0)))
+          f0_eval = -1, scaling_factor = as.numeric(1), f_var = as.integer(0), quantile = -1, alpha = 0, n_flip = as.integer(1000), tol_fspai = -1, definition=as.integer(0)))
   }#define a shadow inferenceDataObject in order tell the cpp code not to perform any inferential analysis.
     
   if(!is.null(inference.data.object) && is.null(checknumber) && sum(inference.data.object@component!=2)!=0){
@@ -13,7 +13,7 @@ checkInferenceParameters <- function(inference.data.object,checknumber,locations
     return(
       new("inferenceDataObject", test = as.integer(0), interval = as.integer(0), type = as.integer(0), component = as.integer(0), exact = as.integer(0), dim = as.integer(0), n_cov = as.integer(0),
           locations = matrix(data=0, nrow = 1 ,ncol = 1), locations_indices = as.integer(0), locations_are_nodes = as.integer(0), coeff = matrix(data=0, nrow = 1 ,ncol = 1), beta0 = -1, f0 = function(){}, 
-          f0_eval = -1, f_var = as.integer(0), quantile = -1, alpha = 0, n_flip = as.integer(1000), tol_fspai = -1, definition=as.integer(0))) 
+          f0_eval = -1, scaling_factor = as.numeric(1), f_var = as.integer(0), quantile = -1, alpha = 0, n_flip = as.integer(1000), tol_fspai = -1, definition=as.integer(0))) 
   }
   
   #check consistency with covariates dimension (if inference on the linear component is required)

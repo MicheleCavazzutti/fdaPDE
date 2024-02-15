@@ -51,6 +51,8 @@ estimated via confidence interval.}
 
 \item{\code{f0_eval}}{Vector of f0 evaluations at the chosen test locations. It will be eventually set later in checkInferenceParameters, if nonparametric inference is required.}
 
+\item{\code{scaling_factor}}{A scaling factor used to adjust lambda in inference variances computation, if not positive it is ignored.}
+
 \item{\code{f_var}}{An integer taking value 1 or 2. If 1 local variance estimates for the nonlinear part of the model will be computed,
 whereas if 2 they will not.}
 

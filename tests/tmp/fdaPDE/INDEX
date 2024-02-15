@@ -1,0 +1,71 @@
+DE.FEM                  Nonparametric density estimation with
+                        differential regularization
+DE.FEM.time             Nonparametric spatio-temporal density
+                        estimation with differential regularization
+DE.heat.FEM             Density initialization
+DE.heat.FEM.time        Spatio-temporal density initialization
+FEM                     Define a surface or spatial field by a Finite
+                        Element basis expansion
+FEM.time                Define a spatio-temporal field by a Finite
+                        Element basis expansion
+FPCA.FEM                Smooth Functional Principal Component Analysis
+covs.test               Covariate test function for the horseshoe
+                        domain
+create.FEM.basis        Create a FEM basis
+create.mesh.1.5D        Create a 1.5D linear network mesh
+create.mesh.2.5D        Create a 'mesh.2.5D' object from the nodes
+                        locations and the connectivity matrix
+create.mesh.2D          Create a 2D triangular mesh
+create.mesh.3D          Create a 'mesh.3D' object from the connectivity
+                        matrix and nodes locations
+eval.FEM                Evaluate a FEM object at a set of point
+                        locations
+eval.FEM.time           Evaluate a FEM.time object at a set of point
+                        locations
+fdaPDE-deprecated       Deprecated Functions
+fs.test                 FELSPLINE test function
+fs.test.3D              FELSPLINE 3D test function
+horseshoe2.5D           Horseshoe2.5D domain
+horseshoe2D             Horseshoe domain
+hub2.5D                 Hub domain
+image.FEM               Image Plot of a 2D FEM object
+image.FEM.time          Image plot of a 2D FEM.time object at a given
+                        time
+inferenceDataObject-class
+                        Class for inference data
+inferenceDataObjectBuilder
+                        Constructor for inferenceDataObject class
+plot.FEM                Plot a 'FEM' object
+plot.FEM.time           Plot a 'FEM.time' object at a given time
+plot.mesh.1.5D          Plot a mesh.1.5D object
+plot.mesh.2.5D          Plot a mesh.2.5D object
+plot.mesh.2D            Plot a mesh.2D object
+plot.mesh.3D            Plot a mesh.3D object
+projection.points.1.5D
+                        Project 2D points onto 1.5D linear network mesh
+projection.points.2.5D
+                        Project 3D points onto 2D 2.5D triangular mesh
+quasicircle2D           Quasicircle2D domain
+quasicircle2Dareal      Quasicircle2Dareal domain
+refine.by.splitting.mesh.1.5D
+                        Create a 'mesh.1.5D' object by splitting each
+                        edge of a given mesh into two subedges.
+refine.by.splitting.mesh.2.5D
+                        Create a 'mesh.2.5D' object by splitting each
+                        triangle of a given mesh into four
+                        subtriangles.
+refine.by.splitting.mesh.2D
+                        Create a 'mesh.2D' object by splitting each
+                        triangle of a given mesh into four
+                        subtriangles.
+refine.by.splitting.mesh.3D
+                        Create a 'mesh.3D' object by splitting each
+                        tetrahedron of a given mesh into eight
+                        subtetrahedrons.
+refine.mesh.1.5D        Refine 1.5D mesh
+refine.mesh.2D          Refine a 2D triangular mesh
+smooth.FEM              Spatial regression with differential
+                        regularization
+smooth.FEM.time         Space-time regression with differential
+                        regularization
+sphere3Ddata            Sphere3Ddata

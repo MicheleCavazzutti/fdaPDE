@@ -16,6 +16,7 @@ locations_by_nodes = FALSE,
 coeff = NULL, 
 beta0 = NULL, 
 f0 = NULL,
+scaling_factor = NULL,
 f_var = FALSE,
 level = 0.95,
 n_flip = 1000)
@@ -68,6 +69,8 @@ If \code{test} is set and \code{beta0} is NULL, will be set to a vector of zeros
 
 \item{f0}{A function object representing the expression of the nonparametric component f under the null hypothesis. Taken into account if \code{test} is set and \code{component} is not parametric.
 If NULL, the default is the null function, hence a test on the significance of the nonparametric component is carried out.}
+
+\item{scaling_factor}{A real positive number used to scale the \code{lambda} effect when computing inference. If left to NULL by default becomes 1 (no scaling).}
 
 \item{f_var}{A logical used to decide whether to estimate the local variance of the nonlinear part of the model.
 The possible values are: FALSE (default) and TRUE.}
