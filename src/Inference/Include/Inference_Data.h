@@ -15,7 +15,7 @@ class InferenceData
 		// Type of analysis required
   		std::vector<std::string> test_Type		= {"not-defined"};	        //!< Values: not-defined [default], one-at-the-time, simultaneous
   		std::vector<std::string> interval_Type  	= {"not-defined"};	        //!< Values: not-defined [default], one-at-the-time, simultaneous, bonferroni
-  		std::vector<std::string> implementation_Type  	= {"wald"}; 	                //!< Values: wald [default], speckman, sign-flip, eigen-sign-flip
+  		std::vector<std::string> implementation_Type  	= {"wald"}; 	                //!< Values: wald [default], speckman, sign-flip, eigen-sign-flip, score
 		std::vector<std::string> component_Type		= {"parametric"};		//!< Values: parametric [default], nonparametric, both
   		std::string exact_Inference			= "exact";		        //!< Values: exact [default], non-exact (not implemented in this version)
 		std::vector<bool> enhanced_Inference		= {false};			//!< Values: false [default], true 

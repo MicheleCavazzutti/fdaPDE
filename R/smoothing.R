@@ -1073,6 +1073,10 @@ smooth.FEM<-function(locations = NULL, observations, FEMbasis,
               inference$f$CI$sign_flip[[length(inference$f$CI$sign_flip)+1]] = ci_f
               inference$f$CI$sign_flip=as.list(inference$f$CI$sign_flip)
             }
+            else if(inference.data.object@type[i]==6){ # score confidence intervals for f
+              inference$f$CI$score[[length(inference$f$CI$score)+1]] = ci_f
+              inference$f$CI$score=as.list(inference$f$CI$score)
+            }
           }
         }
         
@@ -1138,6 +1142,10 @@ smooth.FEM<-function(locations = NULL, observations, FEMbasis,
           else if(inference.data.object@type[i]==5){
             inference$f$p_values$sign_flip[[length(inference$f$p_values$sign_flip)+1]] = p_value
             inference$f$p_values$sign_flip=as.list(inference$f$p_values$sign_flip)
+          }
+          else if(inference.data.object@type[i]==6){
+            inference$f$p_values$score[[length(inference$f$p_values$score)+1]] = p_value
+            inference$f$p_values$score=as.list(inference$f$p_values$score)
           }
         }
         }

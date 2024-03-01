@@ -85,15 +85,30 @@ void Wald_Base<InputHandler, MatrixType>::compute_V_f(void){
     compute_sigma_hat_sq();
   }
 
-  UInt n = this->inf_car.getN_obs(); 
-  MatrixXr Q = MatrixXr::Identity(n, n); // if there are no covariates Q is just an identity 
-						       
-  if(this->inf_car.getRegData()->getCovariates()->rows()!=0){
-    Q = Q - *(this->inf_car.getHp());
-  }
+  if(this->inf_car.getInfData()->get_implementation_type()[this->pos_impl] == "wald"){ // Wald estimator case
+    UInt n = this->inf_car.getN_obs(); 
+    MatrixXr Q = MatrixXr::Identity(n, n); // if there are no covariates Q is just an identity 
+    if(this->inf_car.getRegData()->getCovariates()->rows()!=0){
+      Q = Q - *(this->inf_car.getHp());
+    }
+    this->V_f = this->sigma_hat_sq * (this->Partial_S) * Q * (this->Partial_S.transpose());
+  }else{ // Score case
+    const UInt n_loc = this->inf_car.getN_loc(); 
+    const MatrixXr W_loc = this->inf_car.getW_loc();
 
-  // compute variance-covariance matrix of f_hat
-  this->V_f = this->sigma_hat_sq * (this->Partial_S) * Q * (this->Partial_S.transpose());
+    // compute Q_loc
+    MatrixXr Q_loc; 
+    Q_loc.resize(n_loc, n_loc);
+
+    if(this->inf_car.getRegData()->getCovariates()->rows()==0){ // no covariates case
+      Q_loc = MatrixXr::Identity(n_loc, n_loc);
+    }
+    else{ // covariates case
+      MatrixXr WtW_loc = W_loc.transpose() * W_loc; 
+      Q_loc = MatrixXr::Identity(n_loc, n_loc) - W_loc * WtW_loc.ldlt().solve(W_loc.transpose());
+    }
+    this->V_f = this->sigma_hat_sq * Q_loc; 
+  }
   this->is_V_f_computed = true;
 
   return;
@@ -184,10 +199,8 @@ template<typename InputHandler, typename MatrixType>
 Real Wald_Base<InputHandler, MatrixType>::compute_f_pvalue(void){
   
   Real result;
-  // check that variance-covariance matrix of f_hat has been computed
-  if(!is_V_f_computed){
-    this->compute_V_f();
-  }
+  // check that variance-covariance matrix. Encapsulates both the score and Wald cases
+  this->compute_V_f();
 
   // check that FSPAI inversion went well (if non-exact inference was required)
   if(!is_V_f_computed){
@@ -206,8 +219,13 @@ Real Wald_Base<InputHandler, MatrixType>::compute_f_pvalue(void){
   // get Psi_loc
   const SpMat Psi_loc = this->inf_car.getPsi_loc();
   
-  // compute local estimator 
-  VectorXr f_loc_hat = Psi_loc * f_hat; 
+  MatrixXr V_f_loc;
+  // derive the variance-covariance matrix of the statistics
+  if(this->inf_car.getInfData()->get_implementation_type()[this->pos_impl] == "wald"){ // Classical Wald case
+    V_f_loc = Psi_loc * this->V_f * Psi_loc.transpose();
+  }else{ // Asymptotic score case
+    V_f_loc = Psi_loc.transpose() * this->V_f * Psi_loc;
+  } 
 
   // derive the variance-covariance matrix of f_loc_hat
   MatrixXr V_f_loc = Psi_loc * this->V_f * Psi_loc.transpose();
@@ -243,8 +261,20 @@ Real Wald_Base<InputHandler, MatrixType>::compute_f_pvalue(void){
   eig_inv.diagonal() = eig_values_red.diagonal().array().inverse();
   MatrixXr V_f_loc_red_inv = eig_vector_red * eig_inv * eig_vector_red.transpose();
   
+  Real result_red = 0;
+  
   // compute the test statistics
-  Real result_red = (f_loc_hat - f_0).transpose() * V_f_loc_red_inv * (f_loc_hat - f_0);
+  if(this->inf_car.getInfData()->get_implementation_type()[this->pos_impl] == "wald"){ // Classical Wald case
+    result_red = (f_loc_hat - f_0).transpose() * V_f_loc_red_inv * (f_loc_hat - f_0);
+  }else{ // Asymptotic score case
+    UInt n = this->inf_car.getN_obs(); 
+    MatrixXr Q = MatrixXr::Identity(n, n); // if there are no covariates Q is just an identity 
+    if(this->inf_car.getRegData()->getCovariates()->rows()!=0){
+      Q = Q - *(this->inf_car.getHp());
+  }
+    VectorXr score = Psi_loc.transpose() * Q * (this->inf_car.getZ_hat() - f_0); 
+    result_red = score.transpose() * V_f_loc_red_inv * score;
+  }
   
   // compute the pvalue
   result = R::pchisq(result_red, max_it - k + 1, false, false);

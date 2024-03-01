@@ -38,7 +38,7 @@ public:
   {
     std::map<std::string,std::shared_ptr<Inference_Base<InputHandler, MatrixType>>> factory_Store=get_Factory_Store(); // Get the static factory
     
-    if(implementation_type_=="wald"){
+    if(implementation_type_=="wald" || implementation_type_ == "score"){
       // look if the object is already present in the factory
       auto It = factory_Store.find("wald_exact");
       // if not, insert the new object
