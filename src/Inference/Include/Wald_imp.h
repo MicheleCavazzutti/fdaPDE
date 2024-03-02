@@ -219,6 +219,9 @@ Real Wald_Base<InputHandler, MatrixType>::compute_f_pvalue(void){
   // get Psi_loc
   const SpMat Psi_loc = this->inf_car.getPsi_loc();
   
+  // compute local estimator 
+  VectorXr f_loc_hat = Psi_loc * f_hat;
+  
   MatrixXr V_f_loc;
   // derive the variance-covariance matrix of the statistics
   if(this->inf_car.getInfData()->get_implementation_type()[this->pos_impl] == "wald"){ // Classical Wald case
@@ -226,9 +229,6 @@ Real Wald_Base<InputHandler, MatrixType>::compute_f_pvalue(void){
   }else{ // Asymptotic score case
     V_f_loc = Psi_loc.transpose() * this->V_f * Psi_loc;
   } 
-
-  // derive the variance-covariance matrix of f_loc_hat
-  MatrixXr V_f_loc = Psi_loc * this->V_f * Psi_loc.transpose();
 
   // compute eigenvalue decomposition of V_f_loc
   Eigen::SelfAdjointEigenSolver<MatrixXr> V_f_loc_eig(V_f_loc);
