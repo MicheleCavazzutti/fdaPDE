@@ -120,6 +120,15 @@ Real Eigen_Sign_Flip_Base<InputHandler, MatrixType>::compute_CI_aux_beta_pvalue(
   std::random_device rd; 
   std::default_random_engine eng{rd()};
   std::uniform_int_distribution<> distr{0,1}; // Bernoulli(1/2)
+  
+  // Check wether a seed is present or not, and in case, set it
+  unsigned long int seed_Flip=this->inf_car.getInfData()->get_seed_Flip();
+  
+  if(seed_Flip >= 0){
+    std::default_random_engine eng_seed{seed_Flip};
+    eng = eng_seed;
+  }
+  
   Real count_Up = 0;   // Counter for the number of flipped statistics that are larger the observed statistic
   Real count_Down = 0; // Counter for the number of flipped statistics that are smaller the observed statistic
     
@@ -214,6 +223,15 @@ Real Eigen_Sign_Flip_Base<InputHandler, MatrixType>::compute_CI_aux_f_pvalue(con
     std::random_device rd; 
     std::default_random_engine eng{rd()};
     std::uniform_int_distribution<> distr{0,1}; // Bernoulli(1/2)
+    
+    // Check wether a seed is present or not, and in case, set it
+    unsigned long int seed_Flip=this->inf_car.getInfData()->get_seed_Flip();
+  
+    if(seed_Flip >= 0){
+      std::default_random_engine eng_seed{seed_Flip};
+      eng = eng_seed;
+    }
+    
     Real count_Up = 0;   // Counter for the number of flipped statistics that are larger the observed statistic
     Real count_Down = 0; // Counter for the number of flipped statistics that are smaller the observed statistic
     VectorXr res_perm = V_partial_res_H0_CI; 
@@ -258,6 +276,15 @@ Real Eigen_Sign_Flip_Base<InputHandler, MatrixType>::compute_CI_aux_f_pvalue(con
     std::random_device rd; 
     std::default_random_engine eng{rd()};
     std::uniform_int_distribution<> distr{0,1}; // Bernoulli(1/2)
+    
+    // Check wether a seed is present or not, and in case, set it
+    unsigned long int seed_Flip=this->inf_car.getInfData()->get_seed_Flip();
+  
+    if(seed_Flip >= 0){
+      std::default_random_engine eng_seed{seed_Flip};
+      eng = eng_seed;
+    }
+    
     Real count_Up = 0;   // Counter for the number of flipped statistics that are larger the observed statistic
     Real count_Down = 0; // Counter for the number of flipped statistics that are smaller the observed statistic
     VectorXr res_perm = partial_res_H0_CI; 
@@ -366,6 +393,15 @@ VectorXr Eigen_Sign_Flip_Base<InputHandler, MatrixType>::compute_beta_pvalue(voi
     std::random_device rd; 
     std::default_random_engine eng{rd()};
     std::uniform_int_distribution<> distr{0,1}; // Bernoulli(1/2)
+    
+    // Check wether a seed is present or not, and in case, set it
+    unsigned long int seed_Flip=this->inf_car.getInfData()->get_seed_Flip();
+  
+    if(seed_Flip >= 0){
+      std::default_random_engine eng_seed{seed_Flip};
+      eng = eng_seed;
+    }
+    
     Real count_Up=0;
     Real count_Down=0;
 
@@ -437,6 +473,15 @@ VectorXr Eigen_Sign_Flip_Base<InputHandler, MatrixType>::compute_beta_pvalue(voi
     std::random_device rd; 
     std::default_random_engine eng{rd()};
     std::uniform_int_distribution<> distr{0,1}; // Bernoulli(1/2)
+    
+    // Check wether a seed is present or not, and in case, set it
+    unsigned long int seed_Flip=this->inf_car.getInfData()->get_seed_Flip();
+  
+    if(seed_Flip >= 0){
+      std::default_random_engine eng_seed{seed_Flip};
+      eng = eng_seed;
+    }
+    
     VectorXr count_Up = VectorXr::Zero(p);
     VectorXr count_Down = VectorXr::Zero(p);
     
@@ -545,6 +590,15 @@ Real Eigen_Sign_Flip_Base<InputHandler, MatrixType>::compute_f_pvalue(void){
     std::random_device rd; 
     std::default_random_engine eng{rd()};
     std::uniform_int_distribution<> distr{0,1}; // Bernoulli(1/2)
+    
+    // Check wether a seed is present or not, and in case, set it
+    unsigned long int seed_Flip=this->inf_car.getInfData()->get_seed_Flip();
+  
+    if(seed_Flip >= 0){
+      std::default_random_engine eng_seed{seed_Flip};
+      eng = eng_seed;
+    }
+    
     Real count=0;
     VectorXr res_perm = V_Partial_f_res_H0; 
 
@@ -591,6 +645,15 @@ Real Eigen_Sign_Flip_Base<InputHandler, MatrixType>::compute_f_pvalue(void){
     std::random_device rd; 
     std::default_random_engine eng{rd()};
     std::uniform_int_distribution<> distr{0,1}; // Bernoulli(1/2)
+    
+    // Check wether a seed is present or not, and in case, set it
+    unsigned long int seed_Flip=this->inf_car.getInfData()->get_seed_Flip();
+  
+    if(seed_Flip >= 0){
+      std::default_random_engine eng_seed{seed_Flip};
+      eng = eng_seed;
+    }
+    
     Real count=0;
     VectorXr res_perm = this->Partial_f_res_H0; 
 
